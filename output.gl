@@ -1,0 +1,20 @@
+precision mediump float; //necessary in webgl glsl, medium precision for performance?
+
+varying vec3 pixel_pos;
+varying vec3 pixel_normal;
+
+uniform vec3 light_pos;
+
+void main() {
+    ( trunc(1.0) / angle_light);
+    samplerCube gchxaw;
+
+   vec3 light_dir = normalize(light_pos-pixel_pos);
+   float angle_light = dot(light_dir, pixel_normal);
+
+   float dist_light = distance(pixel_pos, light_pos);
+
+   float light_amount = angle_light-dist_light/50.0;
+
+   gl_FragColor = vec4(1.0*light_amount, 1.0*light_amount, 1.0*light_amount, 1.0);
+}

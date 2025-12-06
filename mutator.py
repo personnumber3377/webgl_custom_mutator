@@ -2,6 +2,7 @@
 import random
 import re
 import string
+import sys
 
 HEADER_SIZE = 128
 
@@ -252,7 +253,7 @@ def afl_custom_deinit(_): return 0
 def afl_custom_queue_new_entry(*a): return 0
 def afl_custom_queue_get(*a): return 0
 
-COUNT = 1000
+COUNT = 1
 
 def test():
     fn = sys.argv[1]
@@ -263,6 +264,10 @@ def test():
     for _ in range(COUNT):
         src = mutate_glsl_source(src)
         print(src)
+    # Save mutated output...
+    fh = open("output.gl", "w")
+    fh.write(src)
+    fh.close()
     return
 
 if __name__=="__main__":
